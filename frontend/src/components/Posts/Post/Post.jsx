@@ -14,12 +14,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
- const Post=()=>{
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+const Post=()=>{
 
 
 
     return(
-  <Box>
+  <Box sx={{ boxShadow: 4 }} > 
     <Card >
       <CardHeader
         avatar={
@@ -28,7 +31,7 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
+          <IconButton color="primary">
             <BorderColorIcon />
           </IconButton>
         }
@@ -42,18 +45,19 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
         alt="Paella dish"
       />
       <CardContent>
+        <Typography pb={3}> #mind#happieness</Typography>
         <Typography variant="body2" color="text.secondary">
           This impressive paella is a perfect party dish and a fun meal to cook
           together with your guests. Add 1 cup of frozen peas along with the mussels,
           if you like.
         </Typography>
       </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
+      <CardActions >
+        <IconButton  color="primary">
+          <ThumbUpOffAltIcon />
         </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
+        <IconButton color="primary"  >
+          <DeleteIcon  color="primary"  sx={{marginLeft:{lg:'280px', md:'170px',sm:'170px', xs:'320px'}}}/>
         </IconButton>
         
       </CardActions>

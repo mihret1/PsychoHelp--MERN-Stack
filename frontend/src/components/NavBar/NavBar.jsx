@@ -18,18 +18,17 @@ const NavBar=()=>{
              <AppBar position="fixed"  style={{backgroundColor:'black', padding:"1%"}} >
                <Toolbar>
                 
-                <Typography variant="h4" mr={93}>
+                <Typography variant="h4" sx={{  marginRight:{lg:"57%",md:"40%", sm:"20%",xs:"5%" },marginBottom :"2%" }}>
                     PsychoHelp
                     
                       
                 </Typography>
                              
                 
-                <Stack direction="row" spacing={2}>
-                   <Avatar alt="Remy Sharp" src={image3}/>
+                <Stack  spacing={2} direction ={{xs:'column',md:'row',sm:"row",lg:'row'}}>
+                   <Avatar alt="Remy Sharp" src={image3} />
                   <Typography variant="h5">mihiret desalegn</Typography>
-                  <Button variant="contained" sx={{  marginLeft:{lg:"92%",md:"90%", sm:"50%",xs:"50%" },marginBottom :"2%" }}>Sign In</Button>
-
+                  <Button variant="contained" sx={{ marginBottom :"2%" }}>Sign In</Button>
                 </Stack>
             </Toolbar>
            </AppBar>

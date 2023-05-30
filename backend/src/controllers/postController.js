@@ -41,12 +41,13 @@ export const deletePost=async(req,res)=>{
 
 
       if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no post with this id')
+      const post =await PostsModel.findById(id)
+      if(!post) return res.status(404).send('no post to delete')
 
-      if(!PostsModel.findById(id)) return res.status(404).send('no post to delete')
       await PostsModel.findByIdAndDelete(id)
-      res.send('delete success')
+      res.status(200).send('delete success')
    }catch(error){
-    res.status().json(error)
+    res.status(404).json(error)
   }
 }
 
@@ -55,9 +56,13 @@ export const updatePost=async(req,res)=>{
 
         const  post=req.body
         const {id}=req.params
+
         if(!id) return  res.send('enter id')
         if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("incorrect id")
-        if(!PostsModel.findById(id)) return res.send('no post by this id')
+
+        const postt =await PostsModel.findById(id)
+        if(!postt) return res.status(404).send('no post to update')
+          
         const updatedPost= await PostsModel.findByIdAndUpdate(id,post,{new:true})
         res.status(200).json(updatedPost)
 

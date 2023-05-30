@@ -9,7 +9,7 @@ dotenv.config()
 import postsRoute from './src/routes/postsRoute.js'
 const app=express()
 const PORT=process.env.PORT || 1000
-// const MONGO_URL=process.env.MONGO_URL
+app.use(bodyParser.json())
 
 mongoose.connect("mongodb://localhost/reduxFullStackMine").then(console.log('database connected'))
         .catch((error)=>console.log(error))

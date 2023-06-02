@@ -1,13 +1,29 @@
 import { Box, Paper, Stack, TextField, Typography ,Button} from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FileBase from 'react-file-base64';
+import { useSelector } from "react-redux";
 
+import { useDispatch } from "react-redux";
+import { createPost } from "../../actions/posts";
  const Form=()=>{
-
-        const handleSubmit=()=>{
+    const dispatch=useDispatch()
+    
+      const [postData,setPostData]=useState({
+        title:'',
+        creator:'',
+        message:'',
+        selectedFile:'',
+        tags:''
+    })
+        
+    
+        const handleSubmit=(e)=>{
+            e.preventDefault()
+            dispatch(createPost(postData))
 
         }
 
+      const clear=()=>{}
 
     return(
         <Box p={3}>
@@ -22,33 +38,44 @@ import FileBase from 'react-file-base64';
                 <TextField
                     
                     label="Creator"
+                    value={postData.creator}
+                    onChange={(e)=>setPostData({...postData,creator:e.target.value})}
                     
                    /> 
                 <TextField
                     
                     label="Title"
+                    value={postData.title}
+                    onChange={(e)=>setPostData({...postData,title:e.target.value})}
+                    
                     
                    /> 
                    <TextField
                     
                     label="Message"
+                    value={postData.message}
+                    onChange={(e)=>setPostData({...postData,message:e.target.value})}
+                    
                     
                    /> 
                    <TextField
                     
                     label="Tags"
+                    value={postData.tags}
+                    onChange={(e)=>setPostData({...postData,tags:e.target.value.split(',')})}
+                    
                     
                    />
                    
                    <FileBase 
                          type="file"
                          multiple={false}
-                         onDone={({base64}) => {}}
+                         onDone={({base64}) => setPostData({...postData,selectedFile:base64})}
 
                     />
-                    <Button variant="contained" > submit</Button>
+                    <Button variant="contained" type="submit"> Submit</Button>
 
-                    <Button variant="contained" color="error"> clear</Button>
+                    <Button variant="contained" color="error" onClick={clear}> Clear</Button>
 
                    </Stack>  
                 </form>

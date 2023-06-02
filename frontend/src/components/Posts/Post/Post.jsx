@@ -41,9 +41,9 @@ const dispatch=useDispatch()
       <CardMedia
         component="img"
         height="194"
-        image={image2}
+        // image={image2}
 
-        // image={post.selectedFile}
+        image={post.selectedFile}
         alt="photo of post"
       />
       <CardContent pl={2}>

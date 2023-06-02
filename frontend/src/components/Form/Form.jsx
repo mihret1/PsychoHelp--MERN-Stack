@@ -20,10 +20,19 @@ import { createPost } from "../../actions/posts";
         const handleSubmit=(e)=>{
             e.preventDefault()
             dispatch(createPost(postData))
+            clear()
 
         }
 
-      const clear=()=>{}
+      const clear=()=>{
+        setPostData({
+            title:'',
+            creator:'',
+            message:'',
+            selectedFile:'',
+            tags:''
+        })
+      }
 
     return(
         <Box p={3}>

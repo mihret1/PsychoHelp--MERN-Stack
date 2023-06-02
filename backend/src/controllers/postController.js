@@ -22,7 +22,7 @@ export const createPost=async(req,res)=>{
 
 
         const post =req.body
-        const newpost= await PostsModel.create({...post,createdAt:new Date().toISOString()})
+        const newpost= await PostsModel.create(post)
         res.status(201).json(newpost)
 
     }catch(error){

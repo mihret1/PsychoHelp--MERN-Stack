@@ -1,6 +1,6 @@
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import React from "react";
-import image2 from "../../assets/image2.png"
+import image2 from "../../assets/image1.png"
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
 import CardMedia from '@mui/material/CardMedia';
@@ -10,16 +10,16 @@ import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
+import moment from 'moment'
+import { deletePost, updatePost } from "../../../actions/posts";
+import { useDispatch } from "react-redux";
 
-const Post=()=>{
+const Post=({post})=>{
 
-
+const dispatch=useDispatch()
 
     return(
   <Box sx={{ boxShadow: 4 }} > 
@@ -35,31 +35,37 @@ const Post=()=>{
             <BorderColorIcon />
           </IconButton>
         }
-        title="Shrimp and Chorizo Paella"
-        subheader="September 14, 2016"
+        title={post.creator}
+        subheader={moment(post.createdAt).fromNow()}
       />
       <CardMedia
         component="img"
         height="194"
         image={image2}
-        alt="Paella dish"
+
+        // image={post.selectedFile}
+        alt="photo of post"
       />
-      <CardContent>
-        <Typography pb={3}> #mind#happieness</Typography>
+      <CardContent pl={2}>
+        <Typography pb={3}>{post.title}</Typography>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+         {post.message}
         </Typography>
+        <Typography  pt={1}> {post.tags.map((tag)=>`#${tag}`)}</Typography>
+
       </CardContent>
       <CardActions >
+        <Stack direction='row'  >
         <IconButton  color="primary">
           <ThumbUpOffAltIcon />
         </IconButton>
-        <IconButton color="primary"  >
-          <DeleteIcon  color="primary"  sx={{marginLeft:{lg:'280px', md:'170px',sm:'170px', xs:'320px'}}}/>
+        <IconButton 
+          onClick={()=>dispatch(deletePost(post._id))}
+           color="primary" 
+           sx={{marginLeft:{lg:'280px', md:'170px',sm:'190px', xs:'320px'}}} >
+          <DeleteIcon  color="primary"  />
         </IconButton>
-        
+        </Stack>
       </CardActions>
       
     </Card>

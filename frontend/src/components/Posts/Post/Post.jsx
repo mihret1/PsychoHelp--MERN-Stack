@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import React from "react";
+import React,{useState} from "react";
 import image2 from "../../assets/image1.png"
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -16,9 +16,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment'
 import { deletePost, updatePost } from "../../../actions/posts";
 import { useDispatch } from "react-redux";
+import { Button } from '@mui/material'
 
-const Post=({post})=>{
 
+const Post=({post,setCurrentId})=>{
 const dispatch=useDispatch()
 
     return(
@@ -30,11 +31,13 @@ const dispatch=useDispatch()
             M
           </Avatar>
         }
+
         action={
-          <IconButton color="primary">
+          <Button color="primary" onClick={()=>setCurrentId(post._id)}>
             <BorderColorIcon />
-          </IconButton>
+          </Button>
         }
+
         title={post.creator}
         subheader={moment(post.createdAt).fromNow()}
       />
@@ -52,7 +55,6 @@ const dispatch=useDispatch()
          {post.message}
         </Typography>
         <Typography  pt={1}> {post.tags.map((tag)=>`#${tag}`)}</Typography>
-
       </CardContent>
       <CardActions >
         <Stack direction='row'  >

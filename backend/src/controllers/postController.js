@@ -55,18 +55,21 @@ export const updatePost=async(req,res)=>{
     try{
 
         const  post=req.body
-        const {id}=req.params
+        const {id:_id}=req.params
 
-        if(!id) return  res.send('enter id')
-        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("incorrect id")
+        if(!_id){
+            res.status(409).json({err:'enter id'})
+        }
+        if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("incorrect id")
 
-        const postt =await PostsModel.findById(id)
+        const postt =await PostsModel.findById(_id)
         if(!postt) return res.status(404).send('no post to update')
           
-        const updatedPost= await PostsModel.findByIdAndUpdate(id,post,{new:true})
-        res.status(200).json(updatedPost)
+        const updatedPost= await PostsModel.findByIdAndUpdate(_id,{...post,_id},{new:true})
+        res.json(updatedPost)
 
     }catch(error){
+        console.log(error)
 
     }
    

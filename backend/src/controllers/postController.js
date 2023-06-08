@@ -19,8 +19,6 @@ export const getPosts=async(req,res)=>{
 export const createPost=async(req,res)=>{
 
     try{
-
-
         const post =req.body
         const newpost= await PostsModel.create(post)
         res.status(201).json(newpost)
@@ -55,17 +53,17 @@ export const updatePost=async(req,res)=>{
     try{
 
         const  post=req.body
-        const {id:_id}=req.params
+        const {id}=req.params
 
-        if(!_id){
+        if(!id){
             res.status(409).json({err:'enter id'})
         }
-        if(!mongoose.Types.ObjectId.isValid(_id)) return res.status(404).send("incorrect id")
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("incorrect id")
 
-        const postt =await PostsModel.findById(_id)
+        const postt =await PostsModel.findById(id)
         if(!postt) return res.status(404).send('no post to update')
           
-        const updatedPost= await PostsModel.findByIdAndUpdate(_id,{...post,_id},{new:true})
+        const updatedPost= await PostsModel.findByIdAndUpdate(id,post,{new:true})
         res.json(updatedPost)
 
     }catch(error){
@@ -74,4 +72,28 @@ export const updatePost=async(req,res)=>{
     }
    
     
+}
+
+
+
+export const likePost=async(req,res)=>{
+
+    try{
+
+        const {id}=req.params
+        if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("incorrect id")
+     const post= await PostsModel.findById(id)
+     const updatedPost= await PostsModel.findByIdAndUpdate(id,{likeCount:post.likeCount+1},{new:true})
+     res.status(200).json(updatedPost)
+
+    }catch(error){
+        console.log(error)
+
+
+    }
+     
+
+
+    
+
 }

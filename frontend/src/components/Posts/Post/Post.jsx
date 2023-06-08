@@ -11,43 +11,44 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
-import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import DeleteIcon from '@mui/icons-material/Delete';
 import moment from 'moment'
-import { deletePost, updatePost } from "../../../actions/posts";
+import { deletePost ,likePost} from "../../../actions/posts";
 import { useDispatch } from "react-redux";
 import { Button } from '@mui/material'
-
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const Post=({post,setCurrentId})=>{
-const dispatch=useDispatch()
+  
 
+  const dispatch=useDispatch()
     return(
-  <Box sx={{ boxShadow: 4 }} > 
-    <Card >
-      <CardHeader
-        avatar={
-          <Avatar sx={{ bgcolor: red[500] }}>
-            M
-          </Avatar>
-        }
+     <Box sx={{ boxShadow: 4 }} > 
+       <Card >
+         <CardHeader
+           avatar={
+            <Avatar sx={{ bgcolor: red[500] }}>
+             M
+            </Avatar>
+            }
 
-        action={
-          <Button color="primary" onClick={()=>setCurrentId(post._id)}>
-            <BorderColorIcon />
-          </Button>
-        }
+           action={
+            <Button color="primary" onClick={()=>setCurrentId(post._id)}>
+               <BorderColorIcon />
+            </Button>
+          }
 
-        title={post.creator}
-        subheader={moment(post.createdAt).fromNow()}
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        // image={image2}
+          title={post.creator}
+          subheader={moment(post.createdAt).fromNow()}
+          />
+        <CardMedia
+          component="img"
+          height="194"
+          // image={image2}
 
-        image={post.selectedFile}
-        alt="photo of post"
+          image={post.selectedFile}
+          alt="photo of post"
       />
       <CardContent pl={2}>
         <Typography pb={3}>{post.title}</Typography>
@@ -58,9 +59,10 @@ const dispatch=useDispatch()
       </CardContent>
       <CardActions >
         <Stack direction='row'  >
-        <IconButton  color="primary">
-          <ThumbUpOffAltIcon />
+        <IconButton  color="primary" onClick={()=>dispatch(likePost(post._id))}>
+         <ThumbUpOffAltIcon />
         </IconButton>
+         {post.likeCount} likes
         <IconButton 
           onClick={()=>dispatch(deletePost(post._id))}
            color="primary" 
@@ -71,9 +73,6 @@ const dispatch=useDispatch()
       </CardActions>
       
     </Card>
-        </Box>
-    )
-}
-
-
+        </Box>)}
+        
 export default Post

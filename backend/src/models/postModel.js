@@ -19,14 +19,17 @@ const postSchema= new mongoose.Schema({
         type:Date,
         default:new Date()
     },
+    likeCount:{
+        type:Number,
+        default:0
+      
+        
+    },
     creator:{type:String},
-
-
-
-
 
 },{timestamps:true})
 
-const PostsModel=mongoose.model('PostsModel',postSchema)
 
+
+const PostsModel=mongoose.model('PostsModel',postSchema)
 export default PostsModel

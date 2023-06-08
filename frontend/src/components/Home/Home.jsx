@@ -15,13 +15,14 @@ import { getPosts } from "../../actions/posts";
     const dispatch=useDispatch()
     const posts=useSelector((state)=>state.posts)
 
-    // useEffect(()=>{
-    //     dispatch(getPosts())
-    // },[dispatch])
+    useEffect(()=>{
+        dispatch(getPosts())
+    },[dispatch])
 
     
     useEffect(()=>{
         dispatch(getPosts())
+        
     },[dispatch,posts])
 
 

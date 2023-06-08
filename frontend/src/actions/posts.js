@@ -51,11 +51,31 @@ export const updatePost=(id,post)=>async(dispatch)=>{
 export const deletePost=(id)=>async(dispatch)=>{
     try{
 
-        const {data}=await axios.delete(`${url}/${id}`)
+        await axios.delete(`${url}/${id}`)
         dispatch({type:'DELETE',payload:id})
     }catch(error){
         console.log(error)
         console.log(error.message)
 
     }
+}
+
+
+export const likePost=(id)=>async(dispatch)=>{
+
+    try{
+        const {data}=await axios.patch(`${url}/${id}/likePost`)
+        dispatch({type:'LIKE',payload:data})
+
+    }catch(error){
+        console.log(error)
+        console.log(error.message)
+
+
+    }
+    
+
+
+
+
 }

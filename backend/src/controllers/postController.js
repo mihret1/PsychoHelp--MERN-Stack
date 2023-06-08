@@ -84,7 +84,7 @@ export const likePost=async(req,res)=>{
         if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send("incorrect id")
      const post= await PostsModel.findById(id)
      const updatedPost= await PostsModel.findByIdAndUpdate(id,{likeCount:post.likeCount+1},{new:true})
-     res.status(200).json(updatedPost)
+     res.json(updatedPost)
 
     }catch(error){
         console.log(error)

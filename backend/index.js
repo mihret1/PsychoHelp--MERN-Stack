@@ -7,6 +7,8 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import postsRoute from './src/routes/postsRoute.js'
+import userRoute from './src/routes/userRoute.js'
+
 const app=express()
 const PORT=process.env.PORT || 1000
 
@@ -14,7 +16,8 @@ app.use(bodyParser.json({limit:"30mb",extended:true}))
 app.use(bodyParser.urlencoded({limit:"30mb",extended:true}))
 
 app.use(cors())
-app.use('/posts',postsRoute) 
+app.use('/posts',postsRoute)
+app.use('/user',userRoute) 
 
 // mongoose.connect("mongodb://127.0.0.1/reduxFullStackMine",{useNewUrlParser:true,useUnifiedTopology:true})
 // .then(()=>app.listen(PORT,()=>{

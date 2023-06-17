@@ -7,7 +7,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 import postsRoute from './src/routes/postsRoute.js'
-import userRoute from './src/routes/userRoute.js'
+import userRoute from './src/routes/authRoute.js'
 
 const app=express()
 const PORT=process.env.PORT || 1000

@@ -3,12 +3,15 @@ import { Box ,Stack,Button, Typography, Grid} from "@mui/material";
 import image from '../assets/mi3.jpg'
 import TextField from '@mui/material/TextField';
 import { GoogleLogin,googleLogout } from "@react-oauth/google";
-import {SignUp,SignIn} from '../../actions/users'
+import {SignUp,SignIn} from '../../actions/auth'
 import {useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 
 
 export default function Auth(){
     const [isSignup,setIsSignup]=useState(true)
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
 
     const [userData,setUserData]=useState({ 
         firstname:'',
@@ -23,14 +26,18 @@ export default function Auth(){
         setUserData({...userData, [e.target.name]:e.target.value})
 
     }
-    const dispatch=useDispatch()
 
-    const handleSubmit=()=>{
+    const changeSignup=()=>setIsSignup((prev)=>!prev)
+
+
+
+    const handleSubmit=(e)=>{
+      e.preventDefault()
 
     if(isSignup){
-        dispatch(SignUp(userData))
+        dispatch(SignUp(userData,navigate))
     }else{
-        dispatch(SignIn(userData))
+        dispatch(SignIn(userData,navigate))
     }
 
 
@@ -44,7 +51,7 @@ export default function Auth(){
             <Grid item lg={6} bgcolor='white'  pt={3} pl={6} pr={6}  pb={3}> 
             <Typography variant="h6" mb={3} ml={22}>Welcome</Typography>
             <Typography ml={22}>SignUp Here</Typography>
-              <form >
+              <form onSubmit={handleSubmit} >
                 <Stack direction='column'spacing={3}  >
                     {isSignup && 
                       <Box>
@@ -68,30 +75,30 @@ export default function Auth(){
                  onChange={onChangeHandler}
                  name="email"
              />
-             {isSignup &&
-              <TextField
-              label="confrimPassword"
-              name="confrimPassword"
-              type="password"
-              onChange={onChangeHandler}
-             />}
+          
              <TextField
                  label="password"
                  type="password"
                  name="password"
                  onChange={onChangeHandler}
              />
+
+            {isSignup &&
+              <TextField
+              label="confrimPassword"
+              name="confrimPassword"
+              type="password"
+              onChange={onChangeHandler}
+             />}
              </Box>
-             <Button variant="contained" type='submit' onChange={handleSubmit} >{isSignup ?'SignUp':'SignIN'}</Button>
+             <Button variant="contained" type='submit' >{isSignup ?'SignUp':'SignIN'}</Button>
 
-             {/* <Button variant="contained">SignUp with google</Button> */}
-
-               <GoogleLogin 
+              <GoogleLogin 
                  onSuccess={(response)=>console.log(response)}
                  onError={(error)=>console.log(error)}
-                    />
+                />
                 
-              <Button onClick={(prev)=>setIsSignup(!prev)}><Typography>{isSignup ? 'already have account ? Login...' : 'dont have account ? register'}</Typography></Button>
+              <Button onClick={changeSignup}><Typography>{isSignup ? 'already have account ? Login...' : 'dont have account ? register'}</Typography></Button>
             
              </Stack>
                 </form>

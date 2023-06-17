@@ -19,12 +19,8 @@ const NavBar=()=>{
                <Toolbar>
                 
                 <Typography variant="h4" sx={{  marginRight:{lg:"57%",md:"40%", sm:"20%",xs:"5%" },marginBottom :"2%" }}>
-                    PsychoHelp
-                    
-                      
-                </Typography>
-                             
-                
+                    PsychoHelp   
+                </Typography> 
                 <Stack  spacing={2} direction ={{xs:'column',md:'row',sm:"row",lg:'row'}}>
                    <Avatar alt="Remy Sharp" src={image3} />
                   <Typography variant="h5">mihiret desalegn</Typography>
@@ -32,15 +28,15 @@ const NavBar=()=>{
                 </Stack>
             </Toolbar>
            </AppBar>
+           <Box sx={{boxShadow: 3}}>
            <img src={image3 } alt="navbar image" style={{width:"100%" , height:"300px"}}/>
            <Typography variant="h5" align="center" pl={8} pr={8} color="white" mt={4} pb={5}>
               your problems is mine to so come lets talk about it and solve it together.
               In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to 
               demonstrate the visual form of a document or a typeface without relying on meaningful 
               content.
-           </Typography>
-        {/* <Button variant="contained" sx={{  marginLeft:{lg:"92%",md:"90%", sm:"50%",xs:"50%" },marginBottom :"2%" }}>Sign In</Button> */}
-        
+           </Typography>  
+           </Box>      
         </Box>
       
     )

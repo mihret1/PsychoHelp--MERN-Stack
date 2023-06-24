@@ -6,7 +6,7 @@ import { GoogleLogin,googleLogout } from "@react-oauth/google";
 import {SignUp,SignIn} from '../../actions/auth'
 import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
-
+import jwt_decode from 'jwt-decode'
 
 export default function Auth(){
     const [isSignup,setIsSignup]=useState(true)
@@ -42,6 +42,32 @@ export default function Auth(){
 
 
     }
+
+
+    
+   const handleGoogle=(response)=>{
+          const data=jwt_decode(response?.credential)
+          const token=response.clientId
+
+          try{
+            dispatch({type:Auth,data:{result:data,token:token}})
+            navigate('/')
+
+           }catch(error){
+            console.log(error)
+
+          }       
+   } 
+
+
+
+   const googleFail=(error)=>{
+    console.log(error)
+   }
+
+
+
+
     return(
         <Box style={{color:'grey'}} bgcolor="" pr={13} pl={15} pt={7}  pb={10}>
         <Grid container  sx={{boxShadow:4}} >
@@ -92,12 +118,14 @@ export default function Auth(){
              />}
              </Box>
              <Button variant="contained" type='submit' >{isSignup ?'SignUp':'SignIN'}</Button>
+            
 
+         
               <GoogleLogin 
-                 onSuccess={(response)=>console.log(response)}
-                 onError={(error)=>console.log(error)}
-                />
-                
+                 onSuccess={handleGoogle}
+                 onError={googleFail}
+              />
+                  
               <Button onClick={changeSignup}><Typography>{isSignup ? 'already have account ? Login...' : 'dont have account ? register'}</Typography></Button>
             
              </Stack>

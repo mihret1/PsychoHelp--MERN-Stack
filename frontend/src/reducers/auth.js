@@ -1,12 +1,13 @@
-export default(auth=[],action)=>{
+export default(state={authData:null},action)=>{
+
 
     switch(action.type){
-        case 'SIGNIN':
-            return [...auth,action.payload]
-        case 'SIGNUP':
-            return [...auth,action.payload]
+        case 'AUTH':
+            localStorage.setItem('profile',JSON.stringify({ ...action?.data }))
+            return {...state,authData:action.data}
         default:
-            return auth    
-    }
+            return state
 
+    }
 }
+

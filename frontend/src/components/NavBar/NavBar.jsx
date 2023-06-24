@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu'
 import {Stack,Avatar} from '@mui/material'
 
+import {Link} from 'react-router-dom'
 
 
 const NavBar=()=>{
@@ -19,12 +20,12 @@ const NavBar=()=>{
                <Toolbar>
                 
                 <Typography variant="h4" sx={{  marginRight:{lg:"57%",md:"40%", sm:"20%",xs:"5%" },marginBottom :"2%" }}>
-                    PsychoHelp   
+                   <Link to='/' style={{textDecoration:'none',color:'white'}}>PsychoHelp </Link>   
                 </Typography> 
                 <Stack  spacing={2} direction ={{xs:'column',md:'row',sm:"row",lg:'row'}}>
                    <Avatar alt="Remy Sharp" src={image3} />
                   <Typography variant="h5">mihiret desalegn</Typography>
-                  <Button variant="contained" sx={{ marginBottom :"2%" }}>Sign In</Button>
+                  <Button variant="contained"  sx={{ marginBottom :"2%" }}><Link to="/auth" style={{textDecoration:'none',color:'white'}}>Sign In</Link></Button>
                 </Stack>
             </Toolbar>
            </AppBar>

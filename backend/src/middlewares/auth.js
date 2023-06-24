@@ -6,6 +6,7 @@ const auth=(req,res,next)=>{
     const isCustomToken=token.length<500
 
     if(token && isCustomToken){
+        
         const decodedData=jwt.decode(token,'psychohelp')
 
 

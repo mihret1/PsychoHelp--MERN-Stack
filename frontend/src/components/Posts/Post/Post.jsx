@@ -43,10 +43,12 @@ const Post=({post,setCurrentId})=>{
             </Avatar>
             }
           
-           action={
-            <Button color="primary" onClick={()=>setCurrentId(post._id)}>
+           action= {
+                <Box>
+               {user?.result?._id === post.creator && <Button color="primary" onClick={()=>setCurrentId(post._id)}>
                <BorderColorIcon />
-            </Button>
+                </Button>}
+                 </Box>
           }
 
           title={post.name}
@@ -70,13 +72,16 @@ const Post=({post,setCurrentId})=>{
         <IconButton  color="primary" onClick={()=>dispatch(likePost(post._id))}>
          <ThumbUpOffAltIcon />
         </IconButton>
+
          {post.likeCount} likes
+{ user?.result?._id === post.creator &&
         <IconButton 
           onClick={()=>dispatch(deletePost(post._id))}
            color="primary" 
            sx={{marginLeft:{lg:'280px', md:'170px',sm:'190px', xs:'320px'}}} >
           <DeleteIcon  color="primary"  />
         </IconButton>
+}
         </Stack>
       </CardActions>
       

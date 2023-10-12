@@ -1,6 +1,7 @@
 import express from 'express'
 import PostsModel from '../models/postModel.js'
 import mongoose from 'mongoose'
+import auth from '../middlewares/auth.js'
 const app=express()
 
 
@@ -16,7 +17,7 @@ export const getPosts=async(req,res)=>{
 }
 
 
-export const createPost=async(req,res)=>{
+export const createPost =async(req,res)=>{
 
     try{
         const post =req.body
@@ -30,15 +31,18 @@ export const createPost=async(req,res)=>{
    
     
 }
+
 export const deletePost=async(req,res)=>{
   try{
-    const {id}=req.params
+    const { id }=req.params
+    
     if(!id){
         res.status(409).json({err:'enter id'})
     }
 
 
       if(!mongoose.Types.ObjectId.isValid(id)) return res.status(404).send('no post with this id')
+
       const post =await PostsModel.findById(id)
       if(!post) return res.status(404).send('no post to delete')
 
@@ -89,11 +93,6 @@ export const likePost=async(req,res)=>{
     }catch(error){
         console.log(error)
 
-
     }
      
-
-
-    
-
 }

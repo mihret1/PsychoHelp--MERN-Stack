@@ -9,8 +9,8 @@ import jwt from 'jsonwebtoken'
 export const  SignUp=async(req,res)=>{
 
     const {firstname,lastname,email,password,confrimPassword}=req.body
-    try{
 
+    try{
 
         // if (!firstname || !lastname || !email || !password) return res.status(400).json({err:'all field are required'})
         const alreadySignup= await UserModel.findOne({email:email})
@@ -26,6 +26,7 @@ export const  SignUp=async(req,res)=>{
             'psychohelp',
             {expiresIn:'1d'}
             )
+            
         res.status(201).json({result:user,token})
 
         

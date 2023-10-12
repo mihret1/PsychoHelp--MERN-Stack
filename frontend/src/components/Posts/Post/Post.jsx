@@ -1,5 +1,5 @@
 import { Box, Stack } from "@mui/material";
-import React,{useState} from "react";
+import React,{useEffect, useState} from "react";
 import image2 from "../../assets/image1.png"
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -18,10 +18,20 @@ import { useDispatch } from "react-redux";
 import { Button } from '@mui/material'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { useLocation } from "react-router-dom";
+
+
+
 
 const Post=({post,setCurrentId})=>{
   
+  const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')))
+  const location=useLocation()
 
+  useEffect(()=>{
+    setUser(JSON.parse(localStorage.getItem('profile')))
+  },[location])
+  
   const dispatch=useDispatch()
     return(
      <Box sx={{ boxShadow: 4 }} > 
@@ -29,10 +39,10 @@ const Post=({post,setCurrentId})=>{
          <CardHeader
            avatar={
             <Avatar sx={{ bgcolor: red[500] }}>
-             M
+             {post.creator.charAt(0)}
             </Avatar>
             }
-
+          
            action={
             <Button color="primary" onClick={()=>setCurrentId(post._id)}>
                <BorderColorIcon />
@@ -45,8 +55,6 @@ const Post=({post,setCurrentId})=>{
         <CardMedia
           component="img"
           height="194"
-          // image={image2}
-
           image={post.selectedFile}
           alt="photo of post"
       />

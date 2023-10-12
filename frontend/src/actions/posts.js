@@ -93,12 +93,14 @@ const url='http://localhost:1000/posts'
 
 export const API=axios.create({baseURL:'http://localhost:1000'})
 
-API.interceptors.request.use((req)=>{
+API.interceptors.request.use((req)=>{    
     if(localStorage.getItem('profile')){
         req.headers.Authorization=`Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
     }
     return req
 })
+
+
 
 
 export const getPosts=()=>async(dispatch)=>{

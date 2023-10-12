@@ -20,6 +20,10 @@ const userSchema=new mongoose.Schema({
     
 })
 
+
+
+
+
 const UserModel=mongoose.model('UserModel',userSchema)
 
 export default UserModel

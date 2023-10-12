@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux'
 import {useNavigate} from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 
+
 export default function Auth(){
     const [isSignup,setIsSignup]=useState(true)
     const navigate=useNavigate()

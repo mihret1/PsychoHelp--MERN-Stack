@@ -5,6 +5,9 @@ const postSchema= new mongoose.Schema({
     title:{
         type:String
     },
+    name:{
+        type:String
+    },
     tags:{
         type:[String],
         default:[]
@@ -25,6 +28,7 @@ const postSchema= new mongoose.Schema({
           
     },
     creator:{type:String},
+    
 
 },{timestamps:true})
 

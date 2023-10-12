@@ -4,14 +4,15 @@ import FileBase from 'react-file-base64';
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
+// import { locale } from "moment";
 
 
  const Form=({currentId,setCurrentId})=>{
     const dispatch=useDispatch()
-    
+    const user=JSON.parse(localStorage.getItem('profile'))
     const [postData,setPostData]=useState({
       title:'',
-      creator:'',
+      // creator:'',
       message:'',
       selectedFile:'',
       tags:''
@@ -33,10 +34,10 @@ import { createPost, updatePost } from "../../actions/posts";
         const handleSubmit=(e)=>{
           e.preventDefault()
           if(currentId) {
-            dispatch(updatePost(currentId,postData))
+            dispatch(updatePost(currentId,{...postData,name:user?.result?.name}))
 
           }else{
-            dispatch(createPost(postData))
+            dispatch(createPost({...postData,name:user?.result?.name}))
 
           }
           clear()
@@ -52,7 +53,7 @@ import { createPost, updatePost } from "../../actions/posts";
       const clear=()=>{
         setPostData({
             title:'',
-            creator:'',
+            // creator:'',
             message:'',
             selectedFile:'',
             tags:''
@@ -71,13 +72,14 @@ import { createPost, updatePost } from "../../actions/posts";
                 <Stack spacing={2}>
 
                
-                <TextField
+                {/* <TextField
                     
-                    label="Creator"
+                    label="Creator name"
                     value={postData.creator}
                     onChange={(e)=>setPostData({...postData,creator:e.target.value})}
                     
-                   /> 
+                   />  */}
+                   
                 <TextField
                     
                     label="Title"

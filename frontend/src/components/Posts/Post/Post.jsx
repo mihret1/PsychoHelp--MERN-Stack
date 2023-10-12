@@ -39,7 +39,7 @@ const Post=({post,setCurrentId})=>{
          <CardHeader
            avatar={
             <Avatar sx={{ bgcolor: red[500] }}>
-             {post.creator.charAt(0)}
+             {post?.name?.charAt(0)}
             </Avatar>
             }
           
@@ -49,7 +49,7 @@ const Post=({post,setCurrentId})=>{
             </Button>
           }
 
-          title={post.creator}
+          title={post.name}
           subheader={moment(post.createdAt).fromNow()}
           />
         <CardMedia

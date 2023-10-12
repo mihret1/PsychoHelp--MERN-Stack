@@ -21,7 +21,7 @@ export const createPost =async(req,res)=>{
 
     try{
         const post =req.body
-        const newpost= await PostsModel.create(post)
+        const newpost= await PostsModel.create({...post,creator:req.userId})
         res.status(201).json(newpost)
 
     }catch(error){

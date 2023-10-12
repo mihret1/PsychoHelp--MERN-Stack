@@ -46,10 +46,6 @@ import { createPost, updatePost } from "../../actions/posts";
 
         }
 
-       
-
-       
-
       const clear=()=>{
         setPostData({
             title:'',
@@ -61,7 +57,7 @@ import { createPost, updatePost } from "../../actions/posts";
 
         setCurrentId(null)
       }
-
+       if(!user?.result?.name){return<p>sign in to create post</p>}
     return(
         <Box p={3}>
             <Paper>
@@ -79,7 +75,7 @@ import { createPost, updatePost } from "../../actions/posts";
                     onChange={(e)=>setPostData({...postData,creator:e.target.value})}
                     
                    />  */}
-                   
+
                 <TextField
                     
                     label="Title"

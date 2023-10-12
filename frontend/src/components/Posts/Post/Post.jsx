@@ -49,7 +49,7 @@ const Post=({post,setCurrentId})=>{
                <BorderColorIcon />
                 </Button>}
                  </Box>
-          }
+            }
 
           title={post.name}
           subheader={moment(post.createdAt).fromNow()}

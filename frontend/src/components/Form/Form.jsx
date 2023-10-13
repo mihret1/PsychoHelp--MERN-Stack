@@ -68,7 +68,7 @@ import { createPost, updatePost } from "../../actions/posts";
                 <Stack spacing={2}>
 
                
-               
+
                 {/* <TextField
                     
                     label="Creator name"
@@ -76,6 +76,9 @@ import { createPost, updatePost } from "../../actions/posts";
                     onChange={(e)=>setPostData({...postData,creator:e.target.value})}
                     
                    />  */}
+
+
+                   
 
                 <TextField
                     

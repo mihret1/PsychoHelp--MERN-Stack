@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 const Posts=({setCurrentId})=>{
 
   const {posts}=useSelector((state)=>state.posts)
+  // const posts=useSelector((state)=>state.posts.posts)
 
 
     return(

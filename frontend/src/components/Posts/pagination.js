@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 const Paginationn=({page})=>{
 
     const  {numberOfPage}=useSelector((state)=>state.posts)
-    const  {posts}=useSelector((state)=>state.posts)
+    
     const dispatch=useDispatch()
 
      useEffect(()=>{

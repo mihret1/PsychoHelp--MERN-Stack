@@ -16,8 +16,8 @@ function useQuery(){
 
  const Home=()=>{
     const [currentId,setCurrentId]=useState(null)
-    const posts=useSelector((state)=>state.posts)
-    const dispatch=useDispatch()
+    // const posts=useSelector((state)=>state.posts)
+    // const dispatch=useDispatch()
     const query=useQuery()
     const page=query.get('page') || 1
 

@@ -17,16 +17,16 @@ import { createPost, updatePost } from "../../actions/posts";
       selectedFile:'',
       tags:''
   })
-    const postt=useSelector((state)=>state.posts)
-    const WillupdatePost=postt.find((p)=>currentId? p._id===currentId:null )
+    // const post=useSelector((state)=>state.posts)
+    // const WillupdatePost=post.find((p)=>currentId? p._id===currentId:null )
+    const WillupdatePost = useSelector((state) => (currentId ? state.posts.posts.find((message) => message._id === currentId) : null));
 
-    // const WillupdatePost=useSelector((state)=>currentId? state.posts.find((p)=>p._id===currentId):null)
 
     useEffect(()=>{
-      if(currentId){
+      if(WillupdatePost){
         setPostData(WillupdatePost)
       }
-    },[currentId])
+    },[WillupdatePost])
     
   
 

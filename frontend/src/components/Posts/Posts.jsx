@@ -6,13 +6,13 @@ import { useSelector } from "react-redux";
 
 const Posts=({setCurrentId})=>{
 
-  const posts=useSelector((state)=>state.posts)
+  const {posts}=useSelector((state)=>state.posts)
 
 
     return(
         <Box>
             <Grid container spacing={4}>
-              {posts.map((post)=>(
+              {posts?.map((post)=>(
                  <Grid item lg={6} md={6} sm={12} xs={12}>
                   <Post post={post} setCurrentId={setCurrentId} />
 

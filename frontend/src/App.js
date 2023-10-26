@@ -5,6 +5,7 @@ import NavBar from "../src/components/NavBar/NavBar"
 import Home from "../src/components/Home/Home"
 import Auth from './components/Auth/Auth'
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { redirect } from "react-router-dom";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
            <Box >
                <NavBar />
                <Routes>
-                 <Route exact={true} path='/' element={<Home />}/>
+                 <Route exact={true} path='/' element={()=>redirect('/posts')}/>
+                 <Route  path='/posts' element={<Home />}/>
+
                  <Route path='/auth' element={<Auth />}/>
                </Routes>
            </Box>

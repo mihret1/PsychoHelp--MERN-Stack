@@ -6,9 +6,14 @@ const app=express()
 
 
 export const getPosts=async(req,res)=>{
+    const {page}=req.query
     try{
-        const posts= await PostsModel.find()
-        res.status(200).json(posts)
+        const LIMIT=8
+        const total=PostsModel.countDocuments({})
+        const startIndex=(Number(page)-1)*LIMIT
+        const posts= await PostsModel.find().sort({_id:-1}).limit(8).skip(startIndex)
+        res.status(200).json({data:posts,numberOfPage:Math.ceil(total/LIMIT),currentPage:Number(page)})
+
     }catch(error){
         res.status(400).json({err:error.message})
          console.log(error)

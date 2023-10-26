@@ -21,10 +21,13 @@ export const  SignUp=async(req,res)=>{
         const user= await UserModel.create({name:`${firstname} ${lastname}`,email,password:hashedPassword})
 
        
+
         const token=jwt.sign(
+            
             {email:user.email,id:user._id},
             'psychohelp',
-            {expiresIn:'1d'}
+            {expiresIn:'2d'}
+            
             )
             
         res.status(201).json({result:user,token})

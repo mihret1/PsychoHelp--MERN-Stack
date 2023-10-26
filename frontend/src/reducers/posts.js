@@ -1,5 +1,5 @@
 
-export default(posts=[],action)=>{
+export default(state={posts:[],numberOfPage,currentPage},action)=>{
 
     switch(action.type){
         case 'FETCH_ALL':

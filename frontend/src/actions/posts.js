@@ -103,11 +103,11 @@ API.interceptors.request.use((req)=>{
 
 
 
-export const getPosts=()=>async(dispatch)=>{
+export const getPosts=(page)=>async(dispatch)=>{
 
     try{
-     const  { data } = await API.get('/posts')
-     dispatch({type:'FETCH_ALL',payload:data})
+     const  { data:{data,currentPage,numberOfPage} } = await API.get(`/posts?page=${page}`)
+     dispatch({type:'FETCH_ALL',payload:{data,currentPage,numberOfPage}})
     }catch(error){
         console.log(error)
     }

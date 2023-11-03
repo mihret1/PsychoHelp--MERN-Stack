@@ -129,6 +129,8 @@ export const createPost=(post)=>async(dispatch)=>{
         const {data }= await API.post('/posts',post)
         dispatch({type:'CREATE',payload:data})
 
+        dispatch({type:'END_LOADING'})
+
     }catch(error){
         console.log(error)
     }

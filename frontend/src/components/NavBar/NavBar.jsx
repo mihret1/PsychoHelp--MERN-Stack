@@ -29,6 +29,7 @@ const NavBar=()=>{
       setUser(null)
       navigate('/auth')
 
+
    } 
 
     return(

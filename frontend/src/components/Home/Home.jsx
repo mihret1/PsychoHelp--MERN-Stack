@@ -8,6 +8,7 @@ import { getPosts } from "../../actions/posts";
 import Paginationn from "../Posts/pagination";
 import { useLocation } from "react-router-dom";
 
+import ChipInput from 'material-ui-chip-input';
 
 function useQuery(){
     return new URLSearchParams(useLocation().search)
@@ -20,6 +21,8 @@ function useQuery(){
     // const dispatch=useDispatch()
     const query=useQuery()
     const page=query.get('page') || 1
+    const search=query.get('searchQuery')
+    const tag=query.get('tag')
 
     
 

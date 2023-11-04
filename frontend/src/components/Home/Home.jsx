@@ -1,4 +1,4 @@
-import { Box, Grid } from "@mui/material";
+import { Box, Grid ,AppBar, TextField, Stack} from "@mui/material";
 import React, { useEffect ,useState} from "react";
 import Posts from "../Posts/Posts";
 import  Form from "../Form/Form"
@@ -17,12 +17,12 @@ function useQuery(){
 
  const Home=()=>{
     const [currentId,setCurrentId]=useState(null)
+    const [search,setSearch]=useState('')
+    const [tags,setTags]=useState([])
     // const posts=useSelector((state)=>state.posts)
     // const dispatch=useDispatch()
     const query=useQuery()
     const page=query.get('page') || 1
-    const search=query.get('searchQuery')
-    const tag=query.get('tag')
 
     
 
@@ -32,7 +32,26 @@ function useQuery(){
 
            <Grid item lg={8} md={8} sm={6} xs={12} ><Posts setCurrentId={setCurrentId}/></Grid>
            <Grid item lg={4} md={4} sm={6} xs={12}>
-            <Form   currentId={currentId}  setCurrentId={setCurrentId}/>
+            <Box>
+              <Box ml={3} mr={3} mb={1} spacing={1} p={2} sx={{ height:160 ,backgroundColor:'#afbab5' ,boxShadow:3 }}>
+                <h3 style={{ marginBottom:10 }}>Search by tags and title</h3>
+
+                <Stack pl={3} pr={3} spacing={1} >
+                    <TextField 
+                       variant="outlined"  
+                       sx={{ height:40, marginBottom:2}}
+                       label='search' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+                    
+                    <ChipInput 
+                       label='tags'
+                       onAdd={handleAdd}
+                       style={{  }}
+                       />
+                </Stack>
+              </Box>  
+            
+               <Form   currentId={currentId}  setCurrentId={setCurrentId}/>
+            </Box>
              <Paginationn page={page} />
             </Grid>
         </Grid>

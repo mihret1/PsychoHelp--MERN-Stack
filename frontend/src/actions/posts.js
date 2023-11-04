@@ -118,7 +118,21 @@ export const getPosts=(page)=>async(dispatch)=>{
     }
 
 }
- 
+ export const getPostBySearch=({search,tags})=>async(dispatch)=>{
+    try{
+        dispatch({type:'START_LOADING'})
+
+        const {data}=await API.get(`/posts/search?searchQuery=${search || 'none'}&tags=${tags}`)
+        dispatch({type:'FETCH_BY_SEARCH',payload:data})
+
+        dispatch({type:'START_LOADING'})
+
+    }catch(error){
+        console.log(error)
+
+    }
+
+ }
 
 
 export const createPost=(post)=>async(dispatch)=>{

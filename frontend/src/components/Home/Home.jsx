@@ -36,6 +36,7 @@ function useQuery(){
      const handleSearch=()=>{
         if(search.trim || tags){
             dispatch(getPostBySearch({search,tags:tags.join(',')}))
+            navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
             
         }else{
             navigate('/')

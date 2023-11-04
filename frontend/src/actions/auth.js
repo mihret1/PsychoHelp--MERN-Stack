@@ -71,6 +71,7 @@ export const SignUp=(userData,navigate)=>async(dispatch)=>{
         const {data}= await API.post('user/signup',userData)
         dispatch({type:'AUTH',data})
         navigate('/')
+        
     }catch(error){
         console.log(error)
 

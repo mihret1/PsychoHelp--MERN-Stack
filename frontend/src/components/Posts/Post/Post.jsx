@@ -19,23 +19,33 @@ import { Button } from '@mui/material'
 import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { useLocation } from "react-router-dom";
+import { ButtonBase } from "@material-ui/core";
 
-
+import { useNavigate } from "react-router-dom";
 
 
 const Post=({post,setCurrentId})=>{
   
   const [user,setUser]=useState(JSON.parse(localStorage.getItem('profile')))
   const location=useLocation()
+  const dispatch=useDispatch()
+  const navigate=useNavigate() 
 
   useEffect(()=>{
     setUser(JSON.parse(localStorage.getItem('profile')))
   },[location])
-  
-  const dispatch=useDispatch()
+
+  const openPost=()=>{
+    navigate(`/posts/${post._id}`)
+    //  dispatch(getPostDetail({post._id}))
+
+   }
+
     return(
      <Box sx={{ boxShadow: 4 }} > 
-       <Card >
+        
+      <Card >
+        
          <CardHeader
            avatar={
             <Avatar sx={{ bgcolor: red[500] }}>
@@ -54,27 +64,31 @@ const Post=({post,setCurrentId})=>{
           title={post.name}
           subheader={moment(post.createdAt).fromNow()}
           />
+         
         <CardMedia
           component="img"
           height="194"
           image={post.selectedFile}
           alt="photo of post"
-      />
-      <CardContent pl={2}>
+         />
+       <ButtonBase onClick={openPost}>
+         <CardContent pl={2}>
         <h1 >{post.title}</h1>
         <Typography variant="body2" color="text.secondary">
          {post.message}
         </Typography>
         <Typography  pt={1}> {post.tags.map((tag)=>`#${tag}`)}</Typography>
-      </CardContent>
-      <CardActions >
+        </CardContent>
+       </ButtonBase>
+
+       <CardActions >
         <Stack direction='row'  >
         <IconButton  color="primary" onClick={()=>dispatch(likePost(post._id))}>
          <ThumbUpOffAltIcon />
         </IconButton>
 
          {post.likeCount} likes
-{ user?.result?._id === post.creator &&
+         { user?.result?._id === post.creator &&
         <IconButton 
           onClick={()=>dispatch(deletePost(post._id))}
            color="primary" 
@@ -83,9 +97,9 @@ const Post=({post,setCurrentId})=>{
         </IconButton>
 }
         </Stack>
-      </CardActions>
+       </CardActions>
       
-    </Card>
-        </Box>)}
+      </Card>
+     </Box>)}
         
 export default Post

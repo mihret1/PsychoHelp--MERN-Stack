@@ -42,6 +42,13 @@ function useQuery(){
             navigate('/')
         }
      }
+
+     const handleKeyPress=(e)=>{
+      if(e.keyCode === 13 ){
+         handleSearch()
+
+      }
+     }
     
 
     return(
@@ -59,8 +66,10 @@ function useQuery(){
                        sx={{ height:40, marginBottom:2}}
                        label='search' 
                        value={search} 
-                       onChange={(e)=>setSearch(e.target.value)}/>
-                    
+                       onChange={(e)=>setSearch(e.target.value)}
+                       onKeyDown={handleKeyPress}
+                       />
+                       
                     <ChipInput 
                        label='tags'
                        value={tags}

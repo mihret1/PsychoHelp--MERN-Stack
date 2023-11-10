@@ -43,7 +43,7 @@ export const createPost =async(req,res)=>{
         const post =req.body
         const newpost= await PostsModel.create({...post,creator:req.userId})
         res.status(201).json(newpost)
-        console.log(newpost)
+        // console.log(newpost)
 
     }catch(error){
         res.status(409).json({err:error})

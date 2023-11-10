@@ -61,7 +61,7 @@ const Post=({post,setCurrentId})=>{
           alt="photo of post"
       />
       <CardContent pl={2}>
-        <Typography pb={3}>{post.title}</Typography>
+        <h1 >{post.title}</h1>
         <Typography variant="body2" color="text.secondary">
          {post.message}
         </Typography>

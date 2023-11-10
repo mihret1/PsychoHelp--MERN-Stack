@@ -21,9 +21,11 @@ const PostDetail=()=>{
 
 
     return(
-    <Stack direction='row' spacing={4} >
-        <Stack spacing={2}>
-        <h1>Detail page</h1>
+        <Box>
+           <h1 style={{ textAlign:'center',marginBottom:10 }}> Detail page</h1>
+
+         <Stack m={3} pl={3} direction='row' spacing={2} sx={{ borderRadius:3,boxShadow:3 }} >
+           <Stack spacing={2} sx={{ width:600 }}>
 
             <h2>{post.title}</h2>
             <h3>{post.tags.map((tag)=>(`#${tag}`))}</h3>
@@ -31,14 +33,16 @@ const PostDetail=()=>{
             <p>{post.message}</p>
             <h4>created At: {moment(post.createdAt).fromNow()}</h4>
 
-        </Stack>
+          </Stack>
         <Box>
             <img 
             src={post.selectedFile}
             alt="photo of post"
+            style={{ width:700,height:400 }}
             />
         </Box>
-    </Stack>)
+    </Stack>
+    </Box>)
 }
 
 

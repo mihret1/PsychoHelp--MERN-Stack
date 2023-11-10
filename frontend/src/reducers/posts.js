@@ -16,7 +16,10 @@ export default(state={isLoading:true, posts:[]},action)=>{
              return {...state,posts:action.payload.data}
 
         case 'FETCH_POST':
-            return{...state,post:action.payload.post}
+            return{
+                ...state,post:action.payload.post
+            }
+
         case 'FETCH_ALL':  
             return {
  

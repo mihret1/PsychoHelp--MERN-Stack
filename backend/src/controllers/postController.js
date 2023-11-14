@@ -22,12 +22,12 @@ export const getPosts=async(req,res)=>{
 }
 
 export const getPost=async(req,res)=>{
+    const { id }=req.params
     try{
-        const {id}=req.params
         const post=await PostsModel.findById(id)
         res.status(200).json(post)
     }catch(error){
-        res.status(404).json({Your_err:error.message})
+        res.status(404).json({errormessageis:error.message})
     }
 }
 

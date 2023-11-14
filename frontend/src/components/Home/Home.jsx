@@ -17,6 +17,7 @@ function useQuery(){
  const Home=()=>{
     const [currentId,setCurrentId]=useState(null)
     const [search,setSearch]=useState('')
+
     const [tags,setTags]=useState([])
     const navigate=useNavigate()
 
@@ -24,6 +25,7 @@ function useQuery(){
     // const posts=useSelector((state)=>state.posts)
     const query=useQuery()
     const page=query.get('page') || 1
+    const searchQuery=query.get('searchQuery')
 
      const handleAdd=(tagAdd)=>{
           setTags([...tags,tagAdd])
@@ -43,12 +45,12 @@ function useQuery(){
         }
      }
 
+
      const handleKeyPress=(e)=>{
       if(e.keyCode === 13 ){
          handleSearch()
-
+        }
       }
-     }
     
 
     return(
@@ -67,7 +69,8 @@ function useQuery(){
                        label='search' 
                        value={search} 
                        onChange={(e)=>setSearch(e.target.value)}
-                       onKeyDown={handleKeyPress}
+                       onKeyDown={handleKeyPress} 
+
                        />
                        
                     <ChipInput 
@@ -77,8 +80,8 @@ function useQuery(){
                        onDelete={(tagDelete)=>handleDelete(tagDelete)}
                        style={{  }}
                     />
-
-                       <Button variant='contained'sx={{ backgroundColor:'black' }} 
+           
+                       <Button  variant='contained'sx={{ backgroundColor:'black' }} 
                          onClick={handleSearch}
                           > Search
                        </Button>
@@ -87,7 +90,7 @@ function useQuery(){
             
                <Form   currentId={currentId}  setCurrentId={setCurrentId}/>
             </Box>
-             <Paginationn page={page} />
+            {(!searchQuery && !tags.length)&&( <Paginationn page={page} />)} 
             </Grid>
         </Grid>
         

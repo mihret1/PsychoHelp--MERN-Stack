@@ -13,7 +13,7 @@ export default(state={isLoading:true, posts:[]},action)=>{
                 ...state,isLoading:false
             }
          case 'FETCH_BY_SEARCH':
-             return {...state,posts:action.payload.data}
+             return {...state, posts:action.payload.data }
 
         case 'FETCH_POST':
             return{

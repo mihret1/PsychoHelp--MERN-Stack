@@ -135,16 +135,17 @@ export const getPost=(id)=>async(dispatch)=>{
         dispatch({type:'START_LOADING'})
 
         const {data:{data}}=await API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`)
+        
         dispatch({type:'FETCH_BY_SEARCH',payload:{data} })
-
         dispatch({type:'END_LOADING'})
 
     }catch(error){
-        console.log(error)
+        console.log(error.message)
 
     }
 
  }
+
 
 
 export const createPost=(post)=>async(dispatch)=>{

@@ -35,11 +35,8 @@ const Post=({post,setCurrentId})=>{
     setUser(JSON.parse(localStorage.getItem('profile')))
   },[location])
 
-  const openPost=()=>{
-    navigate(`/posts/${post._id}`)
-    //  dispatch(getPostDetail({post._id}))
+  const openPost=()=> navigate(`/posts/${post._id}`)
 
-   }
 
     return(
      <Box sx={{ boxShadow: 4 }} > 

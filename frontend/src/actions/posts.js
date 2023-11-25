@@ -93,14 +93,13 @@ const url='http://localhost:1000/posts'
 
 export const API=axios.create({baseURL:'http://localhost:1000'})
 
+
 API.interceptors.request.use((req)=>{    
     if(localStorage.getItem('profile')){
         req.headers.Authorization=`Bearer ${JSON.parse(localStorage.getItem('profile')).token}`
     }
     return req
 })
-
-
 
 
 export const getPosts=(page)=>async(dispatch)=>{
@@ -130,25 +129,24 @@ export const getPost=(id)=>async(dispatch)=>{
     }
 }
 
- export const getPostBySearch=(searchQuery)=>async(dispatch)=>{
+
+export const getPostBySearch=(searchQuery)=>async(dispatch)=>{
     try{
         dispatch({type:'START_LOADING'})
 
         const {data:{data}}=await API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`)
-        
+        // const {data:{data}}=await API.get(`/posts/search?searchQuery=${searchQuery.search || 'none'}&tags=${searchQuery.tags}`);
         dispatch({type:'FETCH_BY_SEARCH',payload:{data} })
         dispatch({type:'END_LOADING'})
 
     }catch(error){
-        console.log(error.message)
+        console.log(`the error is ${error.message}`)
 
     }
 
  }
 
-
-
-export const createPost=(post)=>async(dispatch)=>{
+export const createPost=(post,navigate)=>async(dispatch)=>{
 
     try{
         dispatch({type:'START_LOADING'})
@@ -157,15 +155,13 @@ export const createPost=(post)=>async(dispatch)=>{
         dispatch({type:'CREATE',payload:data})
 
         dispatch({type:'END_LOADING'})
+        navigate(`/posts/${data._id}`)
 
     }catch(error){
         console.log(error)
     }
 
 }
-
-
-
 
 export const updatePost=(id,post)=>async(dispatch)=>{
     try{
@@ -180,8 +176,6 @@ export const updatePost=(id,post)=>async(dispatch)=>{
     }
 }
 
-
-
 export const deletePost=(id)=>async(dispatch)=>{
     try{
 
@@ -193,7 +187,6 @@ export const deletePost=(id)=>async(dispatch)=>{
 
     }
 }
-
 
 export const likePost=(id)=>async(dispatch)=>{
 

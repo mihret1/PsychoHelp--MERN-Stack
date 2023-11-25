@@ -5,9 +5,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { createPost, updatePost } from "../../actions/posts";
 // import { locale } from "moment";
+import { useNavigate, useLocation } from "react-router-dom";
 
+// import { Navigation } from "react-router-dom";
 
  const Form=({currentId,setCurrentId})=>{
+  const navigate=useNavigate()
+
     const dispatch=useDispatch()
     const user=JSON.parse(localStorage.getItem('profile'))
     const [postData,setPostData]=useState({
@@ -37,7 +41,7 @@ import { createPost, updatePost } from "../../actions/posts";
             dispatch(updatePost(currentId,{...postData,name:user?.result?.name}))
 
           }else{
-            dispatch(createPost({...postData,name:user?.result?.name}))
+            dispatch(createPost({...postData,name:user?.result?.name},navigate))
 
           }
           clear()

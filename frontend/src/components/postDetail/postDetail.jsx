@@ -3,12 +3,12 @@ import { Box, CircularProgress, Stack } from "@mui/material"
 import { useParams } from "react-router-dom"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { getPost } from "../../actions/posts"
+import { getPost, getPostBySearch } from "../../actions/posts"
 import { useSelector } from "react-redux"
 import moment from "moment"
 
 const PostDetail=()=>{
-    const {id}=useParams()
+    const { id }=useParams()
     const dispatch=useDispatch()
     // const {post,isLoading}=useSelector((state)=>state.posts)
     const { post, posts, isLoading } = useSelector((state) => state.posts);
@@ -16,6 +16,10 @@ const PostDetail=()=>{
     useEffect(()=>{
         dispatch(getPost(id))
     },[id])
+
+    // useEffect(()=>{
+    //   dispatch(getPostBySearch({search:'none',tags:post?.tags.join(',')}))
+    // },[post])
  
     if(!post) return null
 

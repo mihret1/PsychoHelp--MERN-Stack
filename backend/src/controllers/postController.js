@@ -5,6 +5,29 @@ import auth from '../middlewares/auth.js'
 const app=express()
 
 
+
+export const postComment=async(req,res)=>{
+    try{
+        const {id}=req.params
+        const {finalComment}=req.body
+        
+        const post=await PostsModel.findById(id)
+        
+        post.comments.push(finalComment)
+        const updatedPost=await PostsModel.findByIdAndUpdate(id,post,{new:true})
+        
+        res.json(updatedPost)
+        // console.log(updatedPost)
+        
+        
+    }catch(error){
+        res.json(error)
+    }
+}
+
+
+
+
 export const getPosts=async(req,res)=>{
     const {page}=req.query
     try{

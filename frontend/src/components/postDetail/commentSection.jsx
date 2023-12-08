@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { postComment } from '../../actions/posts'
 
-export default function CommentSection({post}) {
+const CommentSection=({post})=> {
     const [comment,setComment]=useState('')
     const [comments,setComments]=useState(post.comments)
     const user=JSON.parse(localStorage.getItem('profile'))
@@ -20,18 +20,25 @@ export default function CommentSection({post}) {
 
   return (
     <div>
-        <h1>write comments here bro</h1>
-        <Stack>
-            {comments.map((c,i)=>(
+          <Stack>
+            comments
+            {comments?.map((c,i)=>(
             <h3>{c}</h3>
             ))}
         </Stack>
+        <h1>write comments here bro</h1>
+    
         <TextField 
            onChange={(e)=>setComment(e.target.value)} 
+           value={comment}
            label='write ur comment'/>
+           
         <Button variant='contained' onClick={handleComment}>
                  comment
         </Button>
     </div>
   )
 }
+
+
+export default CommentSection

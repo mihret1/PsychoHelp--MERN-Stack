@@ -6,21 +6,28 @@ import { useDispatch } from "react-redux"
 import { getPost, getPostBySearch } from "../../actions/posts"
 import { useSelector } from "react-redux"
 import moment from "moment"
+import { useNavigate } from "react-router-dom"
+import CommentSection from "./commentSection"
 
 const PostDetail=()=>{
+  const navigate=useNavigate()
     const { id }=useParams()
     const dispatch=useDispatch()
     // const {post,isLoading}=useSelector((state)=>state.posts)
     const { post, posts, isLoading } = useSelector((state) => state.posts);
 
+
     useEffect(()=>{
         dispatch(getPost(id))
     },[id])
 
+
     // useEffect(()=>{
     //   dispatch(getPostBySearch({search:'none',tags:post?.tags.join(',')}))
     // },[post])
- 
+    // const reccomedationPost=posts.filter(({_id}) => _id !==post._id)
+    // const openPost=(_id)=>navigate(`/posts/${_id}`)
+
     if(!post) return null
 
      if(isLoading) return <CircularProgress />
@@ -48,6 +55,24 @@ const PostDetail=()=>{
             />
         </Box>
     </Stack>
+    <div>
+      <CommentSection post={post}/>
+
+    </div>
+
+  
+  {/* {!!reccomedationPost.length && <Stack direction='row' spacing={2}>
+     { reccomedationPost.map((r)=>(
+      <Box  onClick={()=>openPost(r._id)} sx={{ height:100,width:100 }}>
+        <img src={r.selectedFile}/>
+        {r.name}
+        {r.title}
+        {r.message}
+        
+      </Box>
+     ))}
+    </Stack>
+  } */}
     </Box>)
 }
 

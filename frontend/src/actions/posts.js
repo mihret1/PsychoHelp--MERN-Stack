@@ -101,6 +101,15 @@ API.interceptors.request.use((req)=>{
     return req
 })
 
+export const postComment=(finalComment,id)=>async(dispatch)=>{
+    try{
+        const {data}=await API.post(`/posts/${id}/postcomment`,{finalComment})
+        dispatch({type:'COMMENT',payload:data})
+        return data.comments
+    }catch(error){console.log(error)}
+    
+
+}
 
 export const getPosts=(page)=>async(dispatch)=>{
 
@@ -145,6 +154,7 @@ export const getPostBySearch=(searchQuery)=>async(dispatch)=>{
     }
 
  }
+
 
 export const createPost=(post,navigate)=>async(dispatch)=>{
 

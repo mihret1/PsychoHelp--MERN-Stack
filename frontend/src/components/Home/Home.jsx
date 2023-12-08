@@ -17,8 +17,8 @@ function useQuery(){
  const Home=()=>{
     const [currentId,setCurrentId]=useState(null)
     const [search,setSearch]=useState('')
-
     const [tags,setTags]=useState([])
+    
     const navigate=useNavigate()
 
     const dispatch=useDispatch()
@@ -38,7 +38,7 @@ function useQuery(){
      const handleSearch=()=>{
         if(search.trim() || tags){
             dispatch(getPostBySearch({search,tags:tags.join(',')}))
-            navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
+            // navigate(`/posts/search?searchQuery=${search || 'none'}&tags=${tags.join(',')}`)
             
         }else{
             navigate('/')

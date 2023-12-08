@@ -61,7 +61,6 @@ export default function Auth(){
    } 
 
 
-
    const googleFail=(error)=>{
     console.log(error)
    }

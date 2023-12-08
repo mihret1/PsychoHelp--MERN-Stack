@@ -9,6 +9,9 @@ router.get('/',getPosts)
 router.get('/:id',getPost)
 router.get('/search',getPostsBySearch)
 
+
+
+
 router.post('/',auth,createPost)
 router.delete('/:id',auth,deletePost)
 router.patch('/:id',auth,updatePost)

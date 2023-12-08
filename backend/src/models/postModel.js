@@ -2,6 +2,11 @@ import mongoose from "mongoose";
 
 
 const postSchema= new mongoose.Schema({
+
+    comments:{
+        type:[String],
+        default:[]
+    },
     title:{
         type:String
     },
@@ -31,8 +36,6 @@ const postSchema= new mongoose.Schema({
     
 
 },{timestamps:true})
-
-
 
 const PostsModel=mongoose.model('PostsModel',postSchema)
 export default PostsModel
